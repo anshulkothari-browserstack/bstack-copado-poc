@@ -1,5 +1,6 @@
 userName: ${BROWSERSTACK_USERNAME}
 accessKey: ${BROWSERSTACK_ACCESS_KEY}
+framework: robot
 
 buildName: copado_robotic_build
 projectName: COPADO_ROBOTIC
