@@ -13,13 +13,9 @@ Run BrowserStack SDK Suite
     ${install}=    Run Process    ${PYTHON_CMD}    -m    pip    install    -r    ${requirements_file}    cwd=${EXECDIR}
     Should Be Equal As Integers    ${install.rc}    0    msg=Dependency install failed. STDOUT: ${install.stdout} STDERR: ${install.stderr}
 
-    ${result}=    Run Process    ${PYTHON_CMD}    -m    browserstack_sdk    robot    ${target_suite}    cwd=${EXECDIR}
-    IF    ${result.rc} != 0
-        ${fallback}=    Run Process    browserstack-sdk    robot    ${target_suite}    cwd=${EXECDIR}
-        Should Be Equal As Integers    ${fallback.rc}    0    msg=BrowserStack SDK run failed. PYTHON MODULE STDOUT: ${result.stdout} PYTHON MODULE STDERR: ${result.stderr} FALLBACK STDOUT: ${fallback.stdout} FALLBACK STDERR: ${fallback.stderr}
-    ELSE
-        Log    ${result.stdout}
-    END
+    ${result}=    Run Process    browserstack-sdk    robot    ${target_suite}    cwd=${EXECDIR}
+    Should Be Equal As Integers    ${result.rc}    0    msg=BrowserStack SDK run failed. STDOUT: ${result.stdout} STDERR: ${result.stderr}
+    Log    ${result.stdout}
 
 *** Keywords ***
 Resolve Requirements File
