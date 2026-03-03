@@ -1,4 +1,4 @@
 robotframework==7.0.1
 robotframework-seleniumlibrary==6.3.0
-selenium==4.28.1
+selenium==4.40.0
 browserstack-sdk
