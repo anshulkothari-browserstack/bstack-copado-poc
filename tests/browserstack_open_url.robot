@@ -17,6 +17,8 @@ Open URL On BrowserStack
     ${options}=    Create BrowserStack Chrome Options
     Open Browser    ${TEST_URL}    browser=Chrome    remote_url=${REMOTE_URL}    options=${options}
     Wait Until Page Contains    Pause Moving Content Violations    20s
+    Execute JavaScript    window.scrollTo(0, document.body.scrollHeight)
+    Sleep    5s
     [Teardown]    Close Browser
 
 *** Keywords ***
