@@ -11,7 +11,7 @@ ${REQUIREMENTS_FILE}    ${CURDIR}${/}..${/}requirements.txt
 *** Test Cases ***
 Open URL On BrowserStack
     Open Browser    ${TEST_URL}    browser=Chrome
-    Wait Until Page Contains    Example Domain    20s
+    Wait Until Page Contains    Pause Moving Content Violations    20s
     [Teardown]    Close Browser
 
 *** Keywords ***
