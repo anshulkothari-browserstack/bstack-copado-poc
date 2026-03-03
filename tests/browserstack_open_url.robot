@@ -1,6 +1,7 @@
 *** Settings ***
 Library    SeleniumLibrary
 Library    Process
+Library    Collections
 Suite Setup    Install Python Dependencies
 
 *** Variables ***
@@ -11,13 +12,10 @@ ${BROWSERSTACK_USERNAME}    %{BROWSERSTACK_USERNAME=}
 ${BROWSERSTACK_ACCESS_KEY}    %{BROWSERSTACK_ACCESS_KEY=}
 ${REMOTE_URL}    https://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub-cloud.browserstack.com/wd/hub
 
-&{CAPABILITIES}    browserName=Chrome    browserVersion=latest    os=Windows    osVersion=10
-...    projectName=COPADO_ROBOTIC    buildName=copado_robotic_build    sessionName=Open URL On BrowserStack
-...    browserstack.accessibility=true    browserstack.accessibilityOptions.wcagVersion=wcag22aaa
-
 *** Test Cases ***
 Open URL On BrowserStack
-    Open Browser    ${TEST_URL}    browser=Chrome    remote_url=${REMOTE_URL}    desired_capabilities=${CAPABILITIES}
+    ${options}=    Create BrowserStack Chrome Options
+    Open Browser    ${TEST_URL}    browser=Chrome    remote_url=${REMOTE_URL}    options=${options}
     Wait Until Page Contains    Pause Moving Content Violations    20s
     [Teardown]    Close Browser
 
@@ -25,3 +23,19 @@ Open URL On BrowserStack
 Install Python Dependencies
     ${result}=    Run Process    ${PYTHON_CMD}    -m    pip    install    -r    ${REQUIREMENTS_FILE}
     Should Be Equal As Integers    ${result.rc}    0    msg=Dependency install failed: ${result.stderr}
+
+Create BrowserStack Chrome Options
+    ${options}=    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    ${bstack_options}=    Create Dictionary
+    ...    os=Windows
+    ...    osVersion=10
+    ...    projectName=COPADO_ROBOTIC
+    ...    buildName=copado_robotic_build
+    ...    sessionName=Open URL On BrowserStack
+    ...    accessibility=${True}
+    ${accessibility_options}=    Create Dictionary    wcagVersion=wcag22aaa
+    Set To Dictionary    ${bstack_options}    accessibilityOptions=${accessibility_options}
+    Call Method    ${options}    set_capability    browserName    Chrome
+    Call Method    ${options}    set_capability    browserVersion    latest
+    Call Method    ${options}    set_capability    bstack:options    ${bstack_options}
+    RETURN    ${options}
