@@ -5,7 +5,8 @@ Suite Setup    Install Python Dependencies
 
 *** Variables ***
 ${TEST_URL}    %{TEST_URL=https://browserstack.github.io/bs-a11y-checks/all/index.html}
-${PYTHON_CMD}    %{PYTHON_CMD=python}
+${PYTHON_CMD}    %{PYTHON_CMD=python3}
+${REQUIREMENTS_FILE}    ${CURDIR}${/}..${/}requirements.txt
 
 *** Test Cases ***
 Open URL On BrowserStack
@@ -15,5 +16,5 @@ Open URL On BrowserStack
 
 *** Keywords ***
 Install Python Dependencies
-    ${result}=    Run Process    ${PYTHON_CMD}    -m    pip    install    -r    ${EXECDIR}/requirements.txt
+    ${result}=    Run Process    ${PYTHON_CMD}    -m    pip    install    -r    ${REQUIREMENTS_FILE}
     Should Be Equal As Integers    ${result.rc}    0    msg=Dependency install failed: ${result.stderr}
