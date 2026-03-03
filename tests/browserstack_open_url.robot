@@ -13,7 +13,7 @@ ${REMOTE_URL}    https://${BROWSERSTACK_USERNAME}:${BROWSERSTACK_ACCESS_KEY}@hub
 
 &{CAPABILITIES}    browserName=Chrome    browserVersion=latest    os=Windows    osVersion=10
 ...    projectName=COPADO_ROBOTIC    buildName=copado_robotic_build    sessionName=Open URL On BrowserStack
-...    browserstack.accessibility=true    browserstack.accessibility.wcagVersion=wcag22aaa
+...    browserstack.accessibility=true    browserstack.accessibilityOptions.wcagVersion=wcag22aaa
 
 *** Test Cases ***
 Open URL On BrowserStack
