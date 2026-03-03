@@ -4,9 +4,14 @@ Library    Process
 *** Variables ***
 ${PYTHON_CMD}    %{PYTHON_CMD=python}
 ${TARGET_SUITE_REL}    tests${/}browserstack_open_url.robot
+${BROWSERSTACK_USERNAME}    %{BROWSERSTACK_USERNAME=}
+${BROWSERSTACK_ACCESS_KEY}    %{BROWSERSTACK_ACCESS_KEY=}
 
 *** Test Cases ***
 Run BrowserStack SDK Suite
+    Should Not Be Empty    ${BROWSERSTACK_USERNAME}    msg=BROWSERSTACK_USERNAME is empty in runtime environment.
+    Should Not Be Empty    ${BROWSERSTACK_ACCESS_KEY}    msg=BROWSERSTACK_ACCESS_KEY is empty in runtime environment.
+
     ${project_root}=    Resolve Project Root
     ${requirements_file}=    Resolve Requirements File
     ${target_suite}=    Resolve Target Suite
@@ -15,7 +20,7 @@ Run BrowserStack SDK Suite
     ${install}=    Run Process    ${PYTHON_CMD}    -m    pip    install    -r    ${requirements_file}    cwd=${project_root}
     Should Be Equal As Integers    ${install.rc}    0    msg=Dependency install failed. STDOUT: ${install.stdout} STDERR: ${install.stderr}
 
-    ${result}=    Run Process    browserstack-sdk    robot    ${target_suite_rel}    cwd=${project_root}
+    ${result}=    Run Process    browserstack-sdk    robot    ${target_suite_rel}    cwd=${project_root}    env:BROWSERSTACK_USERNAME=${BROWSERSTACK_USERNAME}    env:BROWSERSTACK_ACCESS_KEY=${BROWSERSTACK_ACCESS_KEY}
     Should Be Equal As Integers    ${result.rc}    0    msg=BrowserStack SDK run failed. STDOUT: ${result.stdout} STDERR: ${result.stderr}
     Log    ${result.stdout}
 
