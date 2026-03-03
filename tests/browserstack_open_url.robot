@@ -5,7 +5,7 @@ Suite Setup    Install Python Dependencies
 
 *** Variables ***
 ${TEST_URL}    %{TEST_URL=https://browserstack.github.io/bs-a11y-checks/all/index.html}
-${PYTHON_CMD}    %{PYTHON_CMD=python3}
+${PYTHON_CMD}    %{PYTHON_CMD=python}
 ${REQUIREMENTS_FILE}    ${CURDIR}${/}..${/}requirements.txt
 
 *** Test Cases ***
