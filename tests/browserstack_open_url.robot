@@ -32,8 +32,6 @@ Create BrowserStack Chrome Options
     ...    projectName=COPADO_ROBOTIC
     ...    buildName=copado_robotic_build
     ...    sessionName=Open URL On BrowserStack
-    ...    testObservability=${True}
-    ...    browserstackAutomation=${True}
     ...    accessibility=${True}
     ${include_issue_type}=    Create Dictionary
     ...    bestPractice=${True}
