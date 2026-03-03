@@ -32,8 +32,18 @@ Create BrowserStack Chrome Options
     ...    projectName=COPADO_ROBOTIC
     ...    buildName=copado_robotic_build
     ...    sessionName=Open URL On BrowserStack
+    ...    testObservability=${True}
+    ...    browserstackAutomation=${True}
     ...    accessibility=${True}
-    ${accessibility_options}=    Create Dictionary    wcagVersion=wcag22aaa
+    ${include_issue_type}=    Create Dictionary
+    ...    bestPractice=${True}
+    ...    needsReview=${True}
+    ...    experimental=${True}
+    ...    advanced=${True}
+    ${accessibility_options}=    Create Dictionary
+    ...    wcagVersion=wcag22aaa
+    ...    includeIssueType=${include_issue_type}
+    ...    scannerVersion=latest
     Set To Dictionary    ${bstack_options}    accessibilityOptions=${accessibility_options}
     Call Method    ${options}    set_capability    browserName    Chrome
     Call Method    ${options}    set_capability    browserVersion    latest
