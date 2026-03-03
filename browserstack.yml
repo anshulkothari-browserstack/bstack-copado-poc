@@ -32,3 +32,4 @@ accessibilityOptions:
     needsReview: true
     experimental: true
     advanced: true
+  scannerVersion: latest
