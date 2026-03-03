@@ -1,0 +1,33 @@
+userName: ${BROWSERSTACK_USERNAME}
+accessKey: ${BROWSERSTACK_ACCESS_KEY}
+
+buildName: copado_robotic_build
+projectName: COPADO_ROBOTIC
+
+platforms:
+  - os: Windows
+    osVersion: 10
+    browser: Chrome
+    browserVersion: 136
+
+parallelsPerPlatform: 1
+
+browserstackLocal: false
+browserStackLocalOptions:
+  skipBinaryInitialisation: true
+
+logLevel: info
+debug: true
+networkLogs: false
+consoleLogs: verbose
+
+testObservability: true
+browserstackAutomation: true
+accessibility: true
+accessibilityOptions:
+  wcagVersion: wcag22aaa
+  includeIssueType:
+    bestPractice: true
+    needsReview: true
+    experimental: true
+    advanced: true
