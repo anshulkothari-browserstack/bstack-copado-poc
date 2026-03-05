@@ -5,7 +5,7 @@ Library    Collections
 Suite Setup    Install Python Dependencies
 
 *** Variables ***
-${TEST_URL}    %{TEST_URL=https://browserstack.github.io/bs-a11y-checks/all/index.html}
+${TEST_URL}    %{TEST_URL=https://browserstack.github.io/bs-a11y-checks/all/typec.html}
 ${PYTHON_CMD}    %{PYTHON_CMD=python}
 ${REQUIREMENTS_FILE}    ${CURDIR}${/}..${/}requirements.txt
 ${BROWSERSTACK_USERNAME}    %{BROWSERSTACK_USERNAME=}
